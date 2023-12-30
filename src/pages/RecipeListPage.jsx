@@ -1,13 +1,19 @@
-import { Center, Heading } from "@chakra-ui/react";
-import { data } from "../utils/data";
+import { Flex } from "@chakra-ui/react";
+import { RecipeItemCard } from "../components/RecipeItemCard";
 
-export const RecipeListPage = () => {
-  // You can play around with the console log, but ultimately remove it once you are done
-  console.log(data.hits[0].recipe.label);
-
+export const RecipeListPage = ({ data, clickHandler }) => {
   return (
-    <Center h="100vh" flexDir="column">
-      <Heading>Your Recipe App</Heading>
-    </Center>
+    <>
+      <Flex wrap="wrap" justifyContent="center">
+        {data &&
+          data.map((item, index) => (
+            <RecipeItemCard
+              key={index}
+              item={item}
+              onClick={() => clickHandler(index)}
+            />
+          ))}
+      </Flex>
+    </>
   );
 };
